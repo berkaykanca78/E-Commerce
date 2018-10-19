@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container pb-5">
+    <h2>Bizimle İletişime Geçin</h2>
+    <hr />
+    @if (ViewData["result"] != null)
+    {
+        @ViewData["result"].ToString();
+    }
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <label for="adsoyad">Ad Soyad</label>
+            <input type="text" class="form-control" id="adsoyad" name="adsoyad">
+        </div>
+        <div class="form-group">
+            <label for="email">Mail Adresi</label>
+            <input type="email" class="form-control" id="email" name="email">
+        </div>
+        <div class="form-group">
+            <label for="konu">Konu</label>
+            <input type="text" class="form-control" id="konu" name="konu">
+        </div>
+        <div class="form-group">
+            <label for="mesaj">Mesaj</label>
+            <textarea class="form-control" id="mesaj" name="mesaj"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Gönder</button>
+    }
+</div>

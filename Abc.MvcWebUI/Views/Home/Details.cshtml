@@ -1,0 +1,56 @@
+﻿@using Abc.MvcWebUI.Entity;
+@model Product
+@{
+    ViewBag.Title = "Details";
+}
+<div id="product-details" class="container pb-5">
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/Upload/@Model.Image" class="img-fluid rounded">
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>@Model.Name</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @if (Model.IsApproved)
+                    {
+                        <span class="badge badge-primary">Stokta</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-danger">Stokta Yok</span>
+                    }
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <div id="description">
+                        @Model.Description
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    <h4 id="product-price">@Model.Price <i style="color:red;" class="fa fa-lira-sign fa-sm"></i></h4>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("AddToCart", "Cart"))
+                    {
+                        @Html.HiddenFor(i => i.Id)
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-cart-plus"></i>
+                            Sepete Ekle
+                        </button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

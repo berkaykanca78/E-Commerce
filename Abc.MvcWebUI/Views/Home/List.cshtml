@@ -1,0 +1,39 @@
+﻿@using Abc.MvcWebUI.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<ProductModel>
+@{
+    ViewBag.Title = "List";
+}
+<div class="container pb-5">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Action("GetCategories", "Home")
+        </div>
+        <div class="col-md-9">
+            @if (Model.Count() == 0)
+            {
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa fa-exclamation-circle"></i>
+                    Bu Kategoride Bir Ürün Bulunamadı.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa fa-check-square"></i>
+                    <strong>@Model.Count() Adet </strong>Ürün Bulundu.
+                </div>
+            }
+            @Html.Partial("_ProductList", Model)
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-center align-items-center" style="height:100px;">
+            @Html.PagedListPager(Model, _PagedNo => Url.Action("List", "Home", new { PagedNo = _PagedNo }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< İlk", LinkToPreviousPageFormat = "< Önceki", LinkToNextPageFormat = "Sonraki >", LinkToLastPageFormat = "Son >>" })
+        </div>
+    </div>
+</div>
+

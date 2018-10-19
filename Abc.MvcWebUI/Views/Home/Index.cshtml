@@ -1,0 +1,24 @@
+﻿@using Abc.MvcWebUI.Models;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.IPagedList<ProductModel>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="jumbotron">
+    <div class="container">
+        <h1 style="text-align:center">En Popüler Ürünler Uygun Fiyata Sadece Bizde</h1>
+    </div>
+</div>
+<div class="container pb-5">
+    @Html.Partial("_ProductList", Model)
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="d-flex justify-content-center align-items-center" style="height:100px;">
+            @Html.PagedListPager(Model, _PagedNo => Url.Action("Index", "Home", new { PagedNo = _PagedNo }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< İlk", LinkToPreviousPageFormat = "< Önceki", LinkToNextPageFormat = "Sonraki >", LinkToLastPageFormat = "Son >>" })
+        </div>
+    </div>
+</div>
+
+

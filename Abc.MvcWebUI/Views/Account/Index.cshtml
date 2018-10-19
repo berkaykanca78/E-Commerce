@@ -1,0 +1,63 @@
+﻿@using Abc.MvcWebUI.Entity
+@model IEnumerable<Abc.MvcWebUI.Models.UserOrderModel>
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Sipariş Bilgileriniz</h2>
+            <hr />
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sipariş Numarası</th>
+                            <th>Sipariş Tarihi</th>
+                            <th>Toplam Fiyat</th>
+                            <th>Sipariş Durumu</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.OrderNumber</td>
+                                <td>@item.OrderDate.ToShortDateString()</td>
+                                <td>
+                                    <i class="fa fa-lira-sign" aria-hidden="true"></i>
+                                    @item.Total
+                                </td>
+                                <td>
+                                    @if (item.OrderState == EnumOrderState.Waiting)
+                                    {
+                                        <span class="badge-danger">Onay Bekliyor</span>
+                                    }
+                                    else if (item.OrderState == EnumOrderState.Completed)
+                                    {
+                                        <span class="badge-success">Sipariş Tamamlandı.</span>
+                                    }
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Detay", "Details", new { id = item.Id }, new { @class = "btn btn-primary" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    Sitemizden Daha Önce Alışverişiniz Olmamıştır.
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
